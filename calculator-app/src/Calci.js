@@ -7,11 +7,13 @@ export default class Calci extends Component {
 }
 calculate = () => {
     try {
-        const result = eval(this.state.data);
+        const result = eval(this.state.data).toString();
         this.setState({data: result});
-    } catch (e) {
+    } 
+    catch (e) 
+    {
       alert(e);
-        this.setState({data: 'error'})
+      this.setState({data: 'error'})
     }
 }
 handleClick = e => {
@@ -23,6 +25,11 @@ handleClick = e => {
         case 'equal':
             this.calculate();
             break;
+        case 'delete':
+          this.setState({
+            data : this.state.data.substring(0,this.state.data.length-1)
+          });
+          break;
         default:
             this.setState({ data: this.state.data + value});
     }
@@ -56,6 +63,7 @@ handleClick = e => {
 		<span><Button onClick={this.handleClick} label="." value="." /></span>
 		<span class="eval"><Button onClick={this.handleClick} label="=" value="equal" /></span>
 		<span class="operator"><Button onClick={this.handleClick} label="x" value="*" /></span>
+    <span class="del"><Button onClick={this.handleClick} label="Del" value="delete" /></span>
 	</div>
 </div>
       </div>
